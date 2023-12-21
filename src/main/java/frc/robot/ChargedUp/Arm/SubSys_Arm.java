@@ -141,9 +141,10 @@ public class SubSys_Arm extends SubsystemBase {
   public void simulationPeriodic() {
     Arm_ShoulderMotorSim.setBusVoltage(RobotController.getBatteryVoltage());
     Arm_ShoulderFollowerMotorSim.setBusVoltage(RobotController.getBatteryVoltage());
+    Arm_Rot_Sim.setInput(Arm_ShoulderMotorSim.getMotorOutputLeadVoltage());
+    Arm_Rot_Sim.setInput(Arm_ShoulderFollowerMotorSim.getMotorOutputLeadVoltage());
     Arm_Rot_Sim.update(0.020);
 
-    Arm_ShoulderEncoderSim.setRawPosition((int) Arm_Rot_Sim.getAngleRads());
     // SimBattery estimates loaded battery voltages
     RoboRioSim.setVInVoltage(
             BatterySim.calculateDefaultBatteryLoadedVoltage(Arm_Rot_Sim.getCurrentDrawAmps()));
