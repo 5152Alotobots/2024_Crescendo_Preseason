@@ -7,8 +7,19 @@ package frc.robot.ChargedUp.Arm;
 import frc.robot.Constants.Robot;
 
 /** Add your docs here. */
-public class SubSys_Arm_Constants {
-  public static final double ArmShoulderZeroAngle = 44.7; // Degrees
+public class Constants_Arm {
+  //!Disable retract switch
+  public static final boolean DISABLE_RETRACT_STOP_SWITCH = false;
+
+  public static class Sim {
+    public static final double ARM_REDUCTION = 200; //IDK
+    public static final double ARM_LENGTH = 2; //Meters
+    public static final double ARM_WEIGHT = 8; //Kilograms
+    public static final double ARM_Min_ANGLE = 45; //DEG
+    public static final double ARM_MAX_ANGLE = 225; //DEG
+  }
+
+  public static final double ARM_SHOULDER_ZERO_ANGLE = 44.7; // Degrees
   public static final double ArmExtensionEncoderFullyExtendedDegrees = 3460; // Degrees
   public static final double ArmExtensionDegToMetersFactor =
       (Robot.Dimensions.Arm.ArmMaxExtensionLength - Robot.Dimensions.Arm.ArmMinLength)
@@ -17,7 +28,7 @@ public class SubSys_Arm_Constants {
   public static final double ArmShoulderMinAngle = -220.0; // Deg
   public static final double ArmShoulderMaxAngle = 45.0; // Deg
 
-  public class ArmShoulder {
+  public static class ArmShoulder {
     public static final boolean ForwardSoftLimitEnable = false;
     public static final double ForwardSoftLimitThreshold = ArmShoulderMaxAngle;
     public static final boolean ReverseSoftLimitEnable = false;
