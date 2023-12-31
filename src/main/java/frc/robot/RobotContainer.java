@@ -7,12 +7,18 @@
 
 package frc.robot;
 
+import java.io.File;
+
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.library.vision.photonvision.SubSys_Photonvision;
 import frc.robot.library.drivetrains.commands.Cmd_SubSys_DriveTrain_JoysticDefault;
+import frc.robot.library.drivetrains.swerve_original.SubSys_DriveTrain;
 import frc.robot.chargedUp.DriverStation;
 import frc.robot.chargedUp.subsystems.arm.SubSys_Arm;
 import frc.robot.chargedUp.subsystems.arm.commands.Cmd_SubSys_Arm_JoysticDefault;
@@ -21,7 +27,6 @@ import frc.robot.chargedUp.subsystems.bling.SubSys_Bling;
 import frc.robot.chargedUp.subsystems.bling.SubSys_Bling_Constants;
 import frc.robot.chargedUp.subsystems.bling.commands.Cmd_SubSys_Bling_SetColorValue;
 import frc.robot.chargedUp.subsystems.hand.SubSys_Hand;
-import frc.robot.library.drivetrains.SubSys_DriveTrain;
 import frc.robot.library.gyroscopes.pigeon2.SubSys_PigeonGyro;
 
 /**
@@ -47,7 +52,10 @@ public class RobotContainer {
 
 
   // ---- Drive Subsystem (Swerve)
-  public final SubSys_DriveTrain driveSubSys = new SubSys_DriveTrain(gyroSubSys);
+  private final SubSys_Swerve drivebase = new SubSys_Swerve(new File(Filesystem.getDeployDirectory(),
+  "swerve/falcon"));
+
+  //public final SubSys_DriveTrain driveSubSys = new SubSys_DriveTrain(gyroSubSys);
 
   public final SubSys_Photonvision photonvisionSubSys = new SubSys_Photonvision();
 
@@ -79,15 +87,61 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
+    // Swerve Drive Commands
+    AbsoluteDrive closedAbsoluteDrive = new AbsoluteDrive(drivebase,
+        // Applies deadbands and inverts controls because joysticks
+        // are back-right positive while robot
+        // controls are front-left positive
+        () -> MathUtil.applyDeadband(driverStationSubSys.DriveFwdAxis(),
+            OperatorConstants.LEFT_Y_DEADBAND),
+        () -> MathUtil.applyDeadband(driverStationSubSys.DriveStrAxis(),
+            OperatorConstants.LEFT_X_DEADBAND),
+        () -> -driverStationSubSys.m_DriverController.getRightX(),
+        () -> -driverStationSubSys.m_DriverController.getRightY(),
+        false);
+
+    AbsoluteFieldDrive closedFieldAbsoluteDrive = new AbsoluteFieldDrive(drivebase,
+        () ->
+            MathUtil.applyDeadband(driverStationSubSys.DriveFwdAxis(),
+            OperatorConstants.LEFT_Y_DEADBAND),
+        () -> MathUtil.applyDeadband(driverStationSubSys.DriveStrAxis(),
+            OperatorConstants.LEFT_X_DEADBAND),
+        () -> driverStationSubSys.DriveRotStrAxis(), 
+        false);
+   
+    TeleopDrive simClosedFieldRel = new TeleopDrive(drivebase,
+        () -> MathUtil.applyDeadband(driverStationSubSys.DriveFwdAxis(),
+            OperatorConstants.LEFT_Y_DEADBAND),
+        () -> MathUtil.applyDeadband(driverStationSubSys.DriveStrAxis(),
+            OperatorConstants.LEFT_X_DEADBAND),
+        () -> driverStationSubSys.DriveRotStrAxis(), 
+        () -> true, 
+        false, 
+        false);
+
+    TeleopDrive closedFieldRel = new TeleopDrive(drivebase,
+        () -> MathUtil.applyDeadband(driverStationSubSys.DriveFwdAxis(), OperatorConstants.LEFT_Y_DEADBAND),
+        () -> MathUtil.applyDeadband(driverStationSubSys.DriveStrAxis(), OperatorConstants.LEFT_X_DEADBAND),
+        () -> driverStationSubSys.DriveRotStrAxis(), 
+        () -> true, 
+        false, 
+        true);
+
     // Configure default commands
 
-    /* Control System Components */
+    // *** drivebase ***
+    //drivebase.setDefaultCommand(!RobotBase.isSimulation() ? closedAbsoluteDrive : closedFieldAbsoluteDrive);
+    drivebase.setDefaultCommand(simClosedFieldRel);
+
     armSubSys.setDefaultCommand(
         new Cmd_SubSys_Arm_JoysticDefault(
             armSubSys,
-                driverStationSubSys::GetArmRotateAxis,
-                driverStationSubSys::GetArmExtendAxis));
+            () -> driverStationSubSys.GetArmRotateAxis(),
+            () -> driverStationSubSys.GetArmExtendAxis()));
 
+ 
+
+    /*
     driveSubSys.setDefaultCommand(
         new Cmd_SubSys_DriveTrain_JoysticDefault(
             driveSubSys,
@@ -99,7 +153,8 @@ public class RobotContainer {
                 driverStationSubSys::RotateRightPt,
                 driverStationSubSys::DrivePerfModeAActive,
                 driverStationSubSys::DrivePerfModeBActive));
-  }
+*/
+            }
 
   /**
    * Use this method to define your button->command mappings. Buttons can be created by

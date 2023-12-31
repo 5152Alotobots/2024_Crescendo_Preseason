@@ -6,7 +6,7 @@ package frc.robot.library.drivetrains.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.library.drivetrains.SubSys_DriveTrain;
+import frc.robot.library.drivetrains.swerve_original.SubSys_DriveTrain;
 
 public class Cmd_SubSys_DriveTrain_Drive4Time extends CommandBase {
   /** Creates a new Cmd_SubSys_DriveTrain_Drive4Time. */

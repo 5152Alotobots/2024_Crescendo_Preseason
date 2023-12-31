@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.library.drivetrains.SubSys_DriveTrain;
-import frc.robot.library.drivetrains.SubSys_DriveTrain_Constants;
+import frc.robot.library.drivetrains.swerve_original.SubSys_DriveTrain;
+import frc.robot.library.drivetrains.swerve_original.SubSys_DriveTrain_Constants;
 
 public class Cmd_SubSys_DriveTrain_FollowPathPlanner_Traj extends CommandBase {
   /** Creates a new Cmd_SubSys_DriveTrain_FollowPathPlanner_Traj. */
