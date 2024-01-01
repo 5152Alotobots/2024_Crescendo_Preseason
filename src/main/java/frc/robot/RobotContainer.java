@@ -19,6 +19,11 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.library.vision.photonvision.SubSys_Photonvision;
 import frc.robot.library.drivetrains.commands.Cmd_SubSys_DriveTrain_JoysticDefault;
 import frc.robot.library.drivetrains.swerve_original.SubSys_DriveTrain;
+import frc.robot.library.drivetrains.swerve_yagsl.SubSysSwerveYAGSL;
+import frc.robot.library.drivetrains.swerve_yagsl.ConstantsSwerveYAGSL.OperatorConstants;
+import frc.robot.library.drivetrains.swerve_yagsl.commands.AbsoluteDrive;
+import frc.robot.library.drivetrains.swerve_yagsl.commands.AbsoluteFieldDrive;
+import frc.robot.library.drivetrains.swerve_yagsl.commands.TeleopDrive;
 import frc.robot.chargedUp.DriverStation;
 import frc.robot.chargedUp.subsystems.arm.SubSys_Arm;
 import frc.robot.chargedUp.subsystems.arm.commands.Cmd_SubSys_Arm_JoysticDefault;
@@ -48,11 +53,11 @@ public class RobotContainer {
 
   // ---- Pigeon2
 
-  public final SubSys_PigeonGyro gyroSubSys = new SubSys_PigeonGyro();
+  //public final SubSys_PigeonGyro gyroSubSys = new SubSys_PigeonGyro();
 
 
   // ---- Drive Subsystem (Swerve)
-  private final SubSys_Swerve drivebase = new SubSys_Swerve(new File(Filesystem.getDeployDirectory(),
+  private final SubSysSwerveYAGSL swerveYAGSLSubSys = new SubSysSwerveYAGSL(new File(Filesystem.getDeployDirectory(),
   "swerve/falcon"));
 
   //public final SubSys_DriveTrain driveSubSys = new SubSys_DriveTrain(gyroSubSys);
@@ -81,14 +86,14 @@ public class RobotContainer {
 
 
   public final DriverStation driverStationSubSys = new DriverStation();
-  public Auto auto;
+  //public Auto auto;
   public RobotContainer() {
-    auto = new Auto(blingSubSys, photonvisionSubSys, handSubSys, armSubSys, gyroSubSys, driveSubSys);
+    //auto = new Auto(blingSubSys, photonvisionSubSys, handSubSys, armSubSys, gyroSubSys, swerveYAGSLSubSys);
     // Configure the button bindings
     configureButtonBindings();
 
     // Swerve Drive Commands
-    AbsoluteDrive closedAbsoluteDrive = new AbsoluteDrive(drivebase,
+    AbsoluteDrive closedAbsoluteDrive = new AbsoluteDrive(swerveYAGSLSubSys,
         // Applies deadbands and inverts controls because joysticks
         // are back-right positive while robot
         // controls are front-left positive
@@ -100,29 +105,28 @@ public class RobotContainer {
         () -> -driverStationSubSys.m_DriverController.getRightY(),
         false);
 
-    AbsoluteFieldDrive closedFieldAbsoluteDrive = new AbsoluteFieldDrive(drivebase,
-        () ->
-            MathUtil.applyDeadband(driverStationSubSys.DriveFwdAxis(),
-            OperatorConstants.LEFT_Y_DEADBAND),
-        () -> MathUtil.applyDeadband(driverStationSubSys.DriveStrAxis(),
-            OperatorConstants.LEFT_X_DEADBAND),
-        () -> driverStationSubSys.DriveRotStrAxis(), 
-        false);
-   
-    TeleopDrive simClosedFieldRel = new TeleopDrive(drivebase,
+    AbsoluteFieldDrive closedFieldAbsoluteDrive = new AbsoluteFieldDrive(swerveYAGSLSubSys,
         () -> MathUtil.applyDeadband(driverStationSubSys.DriveFwdAxis(),
             OperatorConstants.LEFT_Y_DEADBAND),
         () -> MathUtil.applyDeadband(driverStationSubSys.DriveStrAxis(),
             OperatorConstants.LEFT_X_DEADBAND),
-        () -> driverStationSubSys.DriveRotStrAxis(), 
+        () -> driverStationSubSys.DriveRotAxis(), 
+        false);
+   
+    TeleopDrive simClosedFieldRel = new TeleopDrive(swerveYAGSLSubSys,
+        () -> MathUtil.applyDeadband(driverStationSubSys.DriveFwdAxis(),
+            OperatorConstants.LEFT_Y_DEADBAND),
+        () -> MathUtil.applyDeadband(driverStationSubSys.DriveStrAxis(),
+            OperatorConstants.LEFT_X_DEADBAND),
+        () -> driverStationSubSys.DriveRotAxis(), 
         () -> true, 
         false, 
         false);
 
-    TeleopDrive closedFieldRel = new TeleopDrive(drivebase,
+    TeleopDrive closedFieldRel = new TeleopDrive(swerveYAGSLSubSys,
         () -> MathUtil.applyDeadband(driverStationSubSys.DriveFwdAxis(), OperatorConstants.LEFT_Y_DEADBAND),
         () -> MathUtil.applyDeadband(driverStationSubSys.DriveStrAxis(), OperatorConstants.LEFT_X_DEADBAND),
-        () -> driverStationSubSys.DriveRotStrAxis(), 
+        () -> driverStationSubSys.DriveRotAxis(), 
         () -> true, 
         false, 
         true);
@@ -131,7 +135,7 @@ public class RobotContainer {
 
     // *** drivebase ***
     //drivebase.setDefaultCommand(!RobotBase.isSimulation() ? closedAbsoluteDrive : closedFieldAbsoluteDrive);
-    drivebase.setDefaultCommand(simClosedFieldRel);
+    swerveYAGSLSubSys.setDefaultCommand(simClosedFieldRel);
 
     armSubSys.setDefaultCommand(
         new Cmd_SubSys_Arm_JoysticDefault(
@@ -171,12 +175,12 @@ public class RobotContainer {
     driverStationSubSys.OpenHandButton.onTrue(new InstantCommand(handSubSys::OpenHand, handSubSys));
     driverStationSubSys.CloseHandButton.onTrue(
         new InstantCommand(handSubSys::CloseHand, handSubSys));
-    driverStationSubSys.GyroResetButton.onTrue(new InstantCommand(gyroSubSys::zeroYaw, gyroSubSys));
+    //driverStationSubSys.GyroResetButton.onTrue(new InstantCommand(gyroSubSys::zeroYaw, gyroSubSys));
 
     // Gyro Reset Command Button
-    driverStationSubSys.PoseResetButton.onTrue(
+    //driverStationSubSys.PoseResetButton.onTrue(
         // new InstantCommand(driveSubSys::setPoseToOrigin, driveSubSys));
-        new InstantCommand(driveSubSys::setPoseToOrigin, driveSubSys));
+        // new InstantCommand(swerveYAGSLSubSys::setPoseToOrigin, swerveYAGSLSubSys));
 
     // Test Button
     driverStationSubSys.TestButton.whileTrue(
@@ -229,6 +233,8 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return auto.getAutoCommand();
+    //return auto.getAutoCommand();
+    return new InstantCommand() {
+    };
   }
 }

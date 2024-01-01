@@ -12,7 +12,7 @@ public class DriverStation {
   /** Creates a new DriverStationSubSys. */
 
   // Driver Controller
-  private XboxController m_DriverController = new XboxController(0);
+  public XboxController m_DriverController = new XboxController(0);
 
   public JoystickButton GyroResetButton = new JoystickButton(m_DriverController, 4);
   public JoystickButton CloseHandButton = new JoystickButton(m_DriverController, 6);
