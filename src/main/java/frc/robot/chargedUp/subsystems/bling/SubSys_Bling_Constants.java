@@ -1,4 +1,4 @@
-package frc.robot.chargedUp.subsystems.bling;
+package frc.robot.chargedup.subsystems.bling;
 
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 

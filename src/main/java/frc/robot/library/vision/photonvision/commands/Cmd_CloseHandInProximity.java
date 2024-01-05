@@ -8,7 +8,7 @@
 package frc.robot.library.vision.photonvision.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.chargedUp.subsystems.hand.SubSys_Hand;
+import frc.robot.chargedup.subsystems.hand.SubSys_Hand;
 import frc.robot.library.vision.photonvision.SubSys_Photonvision;
 import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonPipelineResult;

@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.chargedUp.commands.auto.tripleelement;
+package frc.robot.chargedup.commands.auto.tripleelement;
 
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -12,12 +12,12 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.library.vision.photonvision.commands.Cmd_NavigateToBestVisionTarget;
 import frc.robot.library.vision.photonvision.SubSys_Photonvision_Constants;
 import frc.robot.library.vision.photonvision.SubSys_Photonvision;
+import frc.robot.chargedup.subsystems.arm.SubSys_Arm;
+import frc.robot.chargedup.subsystems.arm.commands.Cmd_SubSys_Arm_RotateAndExtend;
+import frc.robot.chargedup.subsystems.bling.SubSys_Bling;
+import frc.robot.chargedup.subsystems.hand.SubSys_Hand;
 import frc.robot.library.drivetrains.commands.Cmd_SubSys_DriveTrain_FollowPathPlanner_Traj;
 import frc.robot.library.drivetrains.swerve_original.SubSys_DriveTrain;
-import frc.robot.chargedUp.subsystems.arm.SubSys_Arm;
-import frc.robot.chargedUp.subsystems.arm.commands.Cmd_SubSys_Arm_RotateAndExtend;
-import frc.robot.chargedUp.subsystems.bling.SubSys_Bling;
-import frc.robot.chargedUp.subsystems.hand.SubSys_Hand;
 import frc.robot.library.gyroscopes.pigeon2.SubSys_PigeonGyro;
 
 public class Auto_1cone2cubestashHPRed_Cmd extends SequentialCommandGroup {

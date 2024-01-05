@@ -12,8 +12,8 @@ import frc.robot.library.vision.photonvision.SubSys_Photonvision_Constants;
 import frc.robot.library.vision.photonvision.SubSys_Photonvision_Constants.AcceptablePIDError;
 import frc.robot.library.vision.photonvision.SubSys_Photonvision_Constants.PIDspeeds;
 import frc.robot.library.vision.photonvision.SubSys_Photonvision;
-import frc.robot.chargedUp.subsystems.bling.SubSys_Bling;
-import frc.robot.chargedUp.subsystems.bling.SubSys_Bling_Constants;
+import frc.robot.chargedup.subsystems.bling.SubSys_Bling;
+import frc.robot.chargedup.subsystems.bling.SubSys_Bling_Constants;
 import frc.robot.library.drivetrains.swerve_original.SubSys_DriveTrain;
 import frc.robot.library.drivetrains.swerve_original.SubSys_DriveTrain_Constants.DriveTrainTrajSettings;
 

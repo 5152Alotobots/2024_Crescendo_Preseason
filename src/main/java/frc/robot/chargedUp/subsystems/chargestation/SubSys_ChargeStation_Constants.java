@@ -1,4 +1,4 @@
-package frc.robot.chargedUp.subsystems.chargestation;
+package frc.robot.chargedup.subsystems.chargestation;
 
 public class SubSys_ChargeStation_Constants {
   /** Add your docs here. */

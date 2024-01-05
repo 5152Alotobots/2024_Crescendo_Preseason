@@ -4,12 +4,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.library.vision.photonvision.SubSys_Photonvision;
-import frc.robot.chargedUp.commands.auto.basic.*;
-import frc.robot.chargedUp.commands.auto.singleelement.cube.*;
-import frc.robot.chargedUp.commands.auto.tripleelement.*;
-import frc.robot.chargedUp.subsystems.arm.SubSys_Arm;
-import frc.robot.chargedUp.subsystems.bling.SubSys_Bling;
-import frc.robot.chargedUp.subsystems.hand.SubSys_Hand;
+import frc.robot.chargedup.commands.auto.basic.*;
+import frc.robot.chargedup.commands.auto.singleelement.cube.*;
+import frc.robot.chargedup.commands.auto.tripleelement.*;
+import frc.robot.chargedup.subsystems.arm.SubSys_Arm;
+import frc.robot.chargedup.subsystems.bling.SubSys_Bling;
+import frc.robot.chargedup.subsystems.hand.SubSys_Hand;
 import frc.robot.library.drivetrains.swerve_original.SubSys_DriveTrain;
 import frc.robot.library.gyroscopes.pigeon2.SubSys_PigeonGyro;
 
