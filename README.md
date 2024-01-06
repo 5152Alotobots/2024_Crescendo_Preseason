@@ -6,18 +6,6 @@
 
 <br>
     </h1>
-
-<!--The GitHub for FRC Team 5152.
-TODO:
--Finish Orginization setup
--Add CI/branch protection
-<div id="top"></div>
-<p align="center">
-    <a href="https://github.com/5152Alotobots/5152_ChargedUp/graphs/contributors" alt="Contributors">
-        <img src="https://img.shields.io/github/contributors/badges/shields" /></a>
-    <a href="https://github.com/5152Alotobots/5152_ChargedUp/pulse" alt="Activity">
-        <img src="https://img.shields.io/github/commit-activity/m/badges/shields" /></a>
-</p>
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -39,10 +27,6 @@ TODO:
     <a href="https://github.com/5152Alotobots/5152_ChargedUp/issues">Request Feature</a>
   </p>
 </div>
-
-## Notice Of Archive  
-
-**This Repository is Archived and Read only. As this code is no longer in use.**
 
 <!-- TABLE OF CONTENTS -->
 <!--
@@ -72,7 +56,6 @@ TODO:
 </details>
 -->
 
-<!--
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
@@ -134,10 +117,12 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 Project Link: [github.com](https://github.com/5152Alotobots/5152_ChargedUp)<br>
 Developer Emails:<br>
+Chelseasmith@otsegops.org<br>
 Seanernstes@otsegops.org<br>
 Rowankortlandt@otsegops.org<br>
 Alanmeyer@otsegops.org<br>
-Chelseasmith@otsegops.org<br>
-Avaburchfield@otsegops.org
+Avaburchfield@otsegops.org<br>
+Gunnardjerf@otsegops.org<br>
+
 <!-- ACKNOWLEDGMENTS -->
 <p align="right">(<a href="#top">back to top</a>)</p>
