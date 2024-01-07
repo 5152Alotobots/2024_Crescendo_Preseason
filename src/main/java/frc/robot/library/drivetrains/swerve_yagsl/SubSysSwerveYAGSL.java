@@ -46,6 +46,7 @@ public class SubSysSwerveYAGSL extends SubsystemBase
    * Initialize {@link SwerveDrive} with the directory provided.
    *
    * @param directory Directory of swerve drive config files.
+   * @throws RuntimeException If swerve parser errors (likely because it doesn't find the swerve configuration files)
    */
   public SubSysSwerveYAGSL(File directory)
   {
@@ -58,17 +59,6 @@ public class SubSysSwerveYAGSL extends SubsystemBase
     {
       throw new RuntimeException(e);
     }
-  }
-
-  /**
-   * Construct the swerve drive.
-   *
-   * @param driveCfg      SwerveDriveConfiguration for the swerve.
-   * @param controllerCfg Swerve Controller.
-   */
-  public SubSysSwerveYAGSL(SwerveDriveConfiguration driveCfg, SwerveControllerConfiguration controllerCfg)
-  {
-    swerveDrive = new SwerveDrive(driveCfg, controllerCfg);
   }
 
   /**
